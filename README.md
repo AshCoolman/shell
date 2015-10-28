@@ -1,4 +1,4 @@
-# Shell
+# Shell: useful scripts for a web developer
 
 Some handy shell scripts
 
@@ -8,10 +8,8 @@ Some handy shell scripts
 * Add any of the following entry point files to `~/.bash_profile`
     e.g. `source index.sh` 
 
-
 ## Entry points
 
 * `index.sh` - include everything
 * `navigation.sh` - navigating files and folders
 * `node.sh` - for working with node
-
