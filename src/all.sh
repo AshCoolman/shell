@@ -4,4 +4,5 @@ source navigation.sh
 source javascript.sh
 source application.sh
 source git.sh
+source confirm-if-history.sh
 source system-ashcoolman.sh
