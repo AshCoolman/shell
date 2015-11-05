@@ -3,6 +3,10 @@ function gh(){
   cd ~/github/$1
 }
 
+function qad(){
+  cd ~/github/qad/$1
+}
+
 function yy(){
   cd ~/yieldify/$1
 }
