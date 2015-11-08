@@ -11,3 +11,8 @@ function mkcd {
 }
 
 alias catt="cat <<EOF > "
+
+
+function loc {
+    find . -name "*.${1}" | xargs wc -l
+}
