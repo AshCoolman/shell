@@ -16,3 +16,11 @@ function cxm(){
 }
 
 alias memcachestart="launchctl load /usr/local/opt/postgresql/homebrew.mxcl.postgresql.plist"
+
+
+function cxmstart(){
+    bundle exec rake db:drop
+    bundle exec rake db:create db:migrate
+    bundle exec rake db:seed
+    rails s
+}
