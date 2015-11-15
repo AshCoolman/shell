@@ -12,3 +12,4 @@ alias codeeditor="sublime"
 
 # Edit bash
 alias bashed="sublime ~/.bash_profile"
+alias bashit=". ~/.bash_profile"
