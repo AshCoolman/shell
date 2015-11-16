@@ -3,86 +3,66 @@
 
 newnpm () {
     # Initial steps
-    echo $(
-mkdir "$1"
-cd "$1"
-mkdir -p src
-cat <<EOF > src/index.js
-'use strict'
-EOF
+    
+    mkdir "$1"
+    cd "$1"
+    mkdir -p src
+    mkdir -p test
+    echo "'use strict';" > src/index.js
+    echo "'use strict';" > test/index.js
+    echo "node_modules/" > .gitignore
 
-mkdir -p test
-cat <<EOF >test/index.js
-EOF
+    npm init --force
+    json -I -f package.json -e 'this.main="./src/index.js"'
+    json -I -f package.json -e 'this.version="0.0.0"'
+    json -I -f package.json -e 'this.scripts.start="node ./src/index.js"'
+    json -I -f package.json -e 'this.scripts.test="nodemon ./test/index.js --watch ./src"'
+    json -I -f package.json -e 'this.scripts.bugs={"url": "https://github.com/ashcoolman/$1/issues"}'
+    json -I -f package.json -e 'this.dependencies={}'
 
-cat <<EOF >.gitignore
-node_modules/
-EOF
+    # Condition: babel
+    if [[ $2 == *"b"* ]]
+    then 
+        echo "** USING BABEL **"
 
-npm init --force
-json -I -f package.json -e 'this.main="./src/index.js"'
-json -I -f package.json -e 'this.version="0.0.0"'
-json -I -f package.json -e 'this.scripts.start="node ./src/index.js"'
-json -I -f package.json -e 'this.scripts.test="nodemon ./test/index.js --watch ./src"'
-json -I -f package.json -e 'this.scripts.bugs={"url": "https://github.com/ashcoolman/$1/issues"}'
-)
+        echo "require('babel/register');" > src/index.js
+        echo "require('babel/register');" > test/index.js
 
-#     # Condition: babel
-#     if [[ $1 == *"b"* ]]
-#     then 
-#         echo $(
-# cat <<EOF >> src/index.js
-# require('babel/register');
-# EOF
+        json -I -f package.json -e 'this.babelrc={}'
+        json -I -f package.json -e 'this.babelrc.plugins=["es2015"]'
+        json -I -f package.json -e 'this.scripts.start="babel-node ./src/index.js"'
+        json -I -f package.json -e 'this.scripts.test="babel-node ./test/index.js"'
 
-# cat <<EOF >> test/index.js
-# require('babel/register');
-# EOF
+        echo "Installing babel, please wait..."
 
+        npm i babel-core --save
+        npm i babel-preset-es2015 --save-dev
+    fi
 
-# json -I -f package.json -e 'this.babelrc.plugins=["es2015"]'
-# json -I -f package.json -e 'this.scripts.start="babel-node ./src/index.js"'
-# json -I -f package.json -e 'this.scripts.test="babel-node ./test/index.js"'
+    # Condition: coffee
+    if [[ $2 == *"c"* ]]
+    then 
+        echo "** USING COFFEE-SCRIPT **"
 
-# npm i babel-core --save
-# npm i babel-preset-es2015 --save-dev
-# )
+        echo "require('coffee-script/register');" >> src/index.js
+        echo "require(__dirname+'/app');" >> src/index.js
+        echo "console.log 'Generated successfully'" > src/app.coffee
+        echo "require('coffee-script/register');" >> test/index.js
 
-#     # Condition: coffee
-#     if [[ $1 == *"c"* ]]
-#     then 
-#         echo $(
-# cat <<EOF >> src/index.js
-# require('coffee/register');
-# EOF
+        json -I -f package.json -e 'this.scripts["coffee-watch"]="mkdir -p dist && coffee --watch --compile --output ./dist ./src"'
+        json -I -f package.json -e 'this.scripts.coffee="mkdir -p dist && coffee --compile --output ./dist ./src"'
 
-# cat <<EOF >> test/index.js
-# require('coffee/register');
-# EOF
+        echo "Installing coffee-script, please wait..."
 
-# json -I -f package.json -e 'this.scripts.build="mkdir -p dist && coffee -c --output ./dist ./src"'
-# json -I -f package.json -e 'this.scripts.start="npm run-script build"'
-
-# npm i coffee-script --save-dev
-# )
-
+        npm i coffee-script --save-dev
+    fi
 
     # Last steps
-    echo $(
-cd "$1"
-cat <<EOF >> src/index.js
-console.log('Generated successfully');
-EOF
+    cd "$1"
+    echo "var module = require('../src/index');" >> test/index.js
 
-cat <<EOF >> test/index.js
-var module = require('../src/index');
-EOF
-
-
-git init
-
-codeeditor .
-)
+    git init
+    codeeditor .
     cd $1
     npm test
 }
