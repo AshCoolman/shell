@@ -19,5 +19,8 @@ npm install -g phantomjs
 npm install -g typescript
 npm install -g live-server
 npm install -g inquirer
+npm install -g onchange
 
 git config --global push.default simple
+
+brew install ack
