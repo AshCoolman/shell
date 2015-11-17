@@ -16,3 +16,5 @@ alias catt="cat <<EOF > "
 function loc {
     find . -name "*.${1}" | xargs wc -l
 }
+
+alias pwdd="pwd | tr -d '\n' | pbcopy"
