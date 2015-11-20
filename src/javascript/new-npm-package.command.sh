@@ -94,8 +94,7 @@ EOF
         echo "" > test/index.ts
     fi
 
-    cd ..
-    # git init
+    
     # codeeditor $1
     # npm test
 }
