@@ -7,4 +7,4 @@ source git.sh
 source confirm-if-history.sh
 source system-ashcoolman.sh
 source lgger.sh
-source colours.sh
+source colours.shsource docker.sh
