@@ -2,6 +2,7 @@
 
 # Applications
 alias subl="sublime"
+alias stree='open -a SourceTree'
 
 code () {
     VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;
