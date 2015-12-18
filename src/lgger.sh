@@ -35,6 +35,6 @@ function lgl() {
 }
 
 # output log
-function olg() {
-  tail -n ${1-10} ~/my-log.txt
+function lgo() {
+  tail -n ${1-10} ~/lgger.txt
 }
