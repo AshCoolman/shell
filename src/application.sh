@@ -4,19 +4,16 @@
 alias subl="sublime"
 alias stree='open -a SourceTree'
 
-code () {
-    VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;
-}
 
 # Abstract applications
-alias codeeditor="sublime"
+alias codeeditor="code"
 
 # Edit bash files
-alias bashed="sublime ~/.bash_profile"
+alias bashed="code ~/.bash_profile"
 alias bashit=". ~/.bash_profile"
 
-alias profed="sublime ~/.profile"
+alias profed="code ~/.profile"
 alias profit=". ~/.profile"
 
-alias barced="sublime ~/.bashrc"
-alias barcit=". ~/.bashrc"
+alias bashrced="code ~/.bashrc"
+alias bashrcit=". ~/.bashrc"

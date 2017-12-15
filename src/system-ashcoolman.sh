@@ -2,25 +2,3 @@
 function gh(){
   cd ~/github/$1
 }
-
-function qad(){
-  cd ~/github/qad/$1
-}
-
-function yy(){
-  cd ~/yieldify/$1
-}
-
-function cxm(){
-  cd ~/yieldify/cxm/$1
-}
-
-alias memcachestart="launchctl load /usr/local/opt/postgresql/homebrew.mxcl.postgresql.plist"
-
-
-function cxmstart(){
-    bundle exec rake db:drop
-    bundle exec rake db:create db:migrate
-    bundle exec rake db:seed
-    rails s
-}
